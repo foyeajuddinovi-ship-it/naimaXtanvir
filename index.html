@@ -7,498 +7,269 @@
     
     <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Kalpurush&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Kalpurush&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Video Player CSS -->
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
     
-    <style>
-        /* Basic Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-pink: #ff4d94;
-            --secondary-purple: #9c27b0;
-            --accent-gold: #ffb347;
-            --dark-bg: #0a0a1a;
-            --card-bg: rgba(255, 255, 255, 0.1);
-            --text-primary: #ffffff;
-            --gradient-love: linear-gradient(135deg, #ff4d94 0%, #9c27b0 50%, #673ab7 100%);
-        }
-
-        body {
-            font-family: 'Hind Siliguri', 'Kalpurush', sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            min-height: 100vh;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(255, 77, 148, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(156, 39, 176, 0.1) 0%, transparent 50%);
-        }
-
-        /* Header */
-        .header {
-            text-align: center;
-            padding: 40px 20px;
-            margin-bottom: 40px;
-        }
-
-        .couple-names {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
-            background: var(--gradient-love);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .tagline {
-            font-size: 1.3rem;
-            opacity: 0.9;
-        }
-
-        /* Language Toggle */
-        .language-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            padding: 5px;
-            display: flex;
-            gap: 5px;
-            z-index: 1000;
-        }
-
-        .lang-btn {
-            padding: 8px 20px;
-            border: none;
-            background: transparent;
-            border-radius: 50px;
-            color: white;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .lang-btn.active {
-            background: var(--primary-pink);
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        /* Cards */
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
-            padding: 25px;
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255,77,148,0.2);
-        }
-
-        .card-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* Video Card */
-        .video-container {
-            border-radius: 15px;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-
-        video {
-            width: 100%;
-            border-radius: 15px;
-        }
-
-        .video-controls {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 10px;
-            background: var(--primary-pink);
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            background: #ff3d7f;
-            transform: translateY(-2px);
-        }
-
-        /* Countdown Card */
-        .countdown-display {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-
-        .time-box {
-            text-align: center;
-            min-width: 80px;
-        }
-
-        .time-value {
-            font-size: 3rem;
-            font-weight: bold;
-            background: var(--gradient-love);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .time-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-top: 5px;
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 4px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--gradient-love);
-            width: 0%;
-            transition: width 1s;
-        }
-
-        /* Love Letter Card */
-        .letter-content {
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
-
-        .signature {
-            text-align: right;
-            margin-top: 30px;
-            font-family: 'Kalpurush', sans-serif;
-            font-size: 1.5rem;
-            color: var(--primary-pink);
-        }
-
-        /* Animation Menu */
-        .animation-menu {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-        }
-
-        .fab-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--primary-pink);
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255,77,148,0.4);
-            transition: 0.3s;
-        }
-
-        .fab-menu {
-            position: absolute;
-            bottom: 70px;
-            right: 0;
-            background: rgba(0,0,0,0.9);
-            border-radius: 15px;
-            padding: 10px;
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .fab-menu.show {
-            display: flex;
-        }
-
-        .anim-option {
-            padding: 10px 20px;
-            border: none;
-            background: rgba(255,255,255,0.1);
-            color: white;
-            border-radius: 10px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.3s;
-        }
-
-        .anim-option:hover {
-            background: var(--primary-pink);
-        }
-
-        /* Canvas for Animations */
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 50px;
-            opacity: 0.7;
-        }
-
-        .developer-info {
-            margin-bottom: 20px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 15px;
-        }
-
-        .social-link {
-            color: white;
-            font-size: 1.2rem;
-            transition: 0.3s;
-        }
-
-        .social-link:hover {
-            color: var(--primary-pink);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .couple-names {
-                font-size: 2.5rem;
-            }
-            
-            .container {
-                grid-template-columns: 1fr;
-                padding: 15px;
-            }
-            
-            .countdown-display {
-                gap: 10px;
-            }
-            
-            .time-box {
-                min-width: 70px;
-            }
-            
-            .time-value {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-heart">❤️</div>
+            <h1>তানভীর ❤️ নাইমা</h1>
+            <p>২০ বছরের ভালোবাসার প্রতিশ্রুতি</p>
+            <div class="loading-bar">
+                <div class="loading-fill"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Language Toggle -->
     <div class="language-toggle">
-        <button class="lang-btn active" onclick="changeLanguage('bn')">বাংলা</button>
-        <button class="lang-btn" onclick="changeLanguage('en')">English</button>
-    </div>
-
-    <!-- Header -->
-    <header class="header">
-        <h1 class="couple-names">তানভীর ❤️ নাইমা</h1>
-        <p class="tagline">২০ বছরের অমর ভালোবাসার প্রতিশ্রুতি</p>
-    </header>
-
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Video Card -->
-        <section class="card">
-            <div class="card-title">
-                <i class="fas fa-video"></i>
-                <h2 data-translate="videoTitle">প্রতিশ্রুতি ভিডিও</h2>
-            </div>
-            
-            <div class="video-container">
-                <!-- সরাসরি ভিডিও ট্যাগ -->
-                <video id="loveVideo" controls playsinline poster="poster.jpg">
-                    <source src="promise.mp4" type="video/mp4">
-                    আপনার ব্রাউজার ভিডিও সাপোর্ট করে না।
-                </video>
-            </div>
-            
-            <div class="video-controls">
-                <button class="btn" onclick="toggleFullscreen()">
-                    <i class="fas fa-expand"></i>
-                    <span data-translate="fullscreen">ফুলস্ক্রীন</span>
-                </button>
-                <button class="btn" onclick="verifyPromise()">
-                    <i class="fas fa-check-circle"></i>
-                    <span data-translate="verify">প্রমাণিত</span>
-                </button>
-            </div>
-        </section>
-
-        <!-- Countdown Card -->
-        <section class="card">
-            <div class="card-title">
-                <i class="far fa-clock"></i>
-                <h2 data-translate="countdownTitle">২০ বছর কাউন্টডাউন</h2>
-            </div>
-            
-            <div class="countdown-display">
-                <div class="time-box">
-                    <div class="time-value" id="years">20</div>
-                    <div class="time-label" data-translate="years">বছর</div>
-                </div>
-                <div class="time-box">
-                    <div class="time-value" id="days">364</div>
-                    <div class="time-label" data-translate="days">দিন</div>
-                </div>
-                <div class="time-box">
-                    <div class="time-value" id="hours">23</div>
-                    <div class="time-label" data-translate="hours">ঘন্টা</div>
-                </div>
-                <div class="time-box">
-                    <div class="time-value" id="minutes">59</div>
-                    <div class="time-label" data-translate="minutes">মিনিট</div>
-                </div>
-                <div class="time-box">
-                    <div class="time-value" id="seconds">59</div>
-                    <div class="time-label" data-translate="seconds">সেকেন্ড</div>
-                </div>
-            </div>
-            
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            
-            <p style="text-align: center; opacity: 0.8; margin-top: 20px;">
-                <span data-translate="until">পূর্ণ হবে</span>: 
-                <span id="targetDate">২৮ নভেম্বর, ২০৪৪</span>
-            </p>
-        </section>
-
-        <!-- Love Letter Card -->
-        <section class="card">
-            <div class="card-title">
-                <i class="fas fa-heart"></i>
-                <h2 data-translate="letterTitle">প্রেমপত্র</h2>
-            </div>
-            
-            <div class="letter-content" data-translate="letterContent">
-                <p>প্রিয় নাইমা,</p>
-                <br>
-                <p>আজ থেকে ঠিক ২০ বছর পর, ২০৪৪ সালের ২৮ নভেম্বর, যখন তুমি এই ওয়েবসাইটটি দেখবে, আমি চাই তুমি জানতে যে আমি এখনও তোমাকে ঠিক ততটাই ভালোবাসি যতটা আজ ভালোবাসি।</p>
-                <br>
-                <p>এই ডিজিটাল প্রতিশ্রুতিই প্রমাণ করবে, সময় যতই বদলাক, পৃথিবী যতই এগিয়ে যাক, তানভীরের হৃদয় শুধু নাইমার জন্য।</p>
-                <br>
-                <p style="font-style: italic; color: var(--primary-pink);">
-                    "আজ থেকেই বলছি, ২০৪৪ সালেও আমার গার্লফ্রেন্ডের নাম হবে নাইমা"
-                </p>
-            </div>
-            
-            <div class="signature">
-                - তানভীর
-            </div>
-        </section>
-    </main>
-
-    <!-- Animation Menu -->
-    <div class="animation-menu">
-        <button class="fab-btn" onclick="toggleAnimMenu()">
-            <i class="fas fa-magic"></i>
+        <button class="lang-btn active" data-lang="bn">
+            <span class="flag">🇧🇩</span>
+            <span>বাংলা</span>
         </button>
-        
-        <div class="fab-menu" id="fabMenu">
-            <button class="anim-option" onclick="changeAnimation('hearts')">
+        <button class="lang-btn" data-lang="en">
+            <span class="flag">🇬🇧</span>
+            <span>English</span>
+        </button>
+    </div>
+
+    <!-- Animation Control -->
+    <div class="animation-control">
+        <button class="anim-toggle-btn" id="animToggle">
+            <i class="fas fa-magic"></i>
+            <span class="anim-text">এনিমেশন</span>
+        </button>
+        <div class="anim-options" id="animOptions">
+            <button class="anim-option active" data-anim="hearts">
                 <i class="fas fa-heart"></i>
-                <span data-translate="hearts">হার্টস</span>
+                <span>হার্টস</span>
             </button>
-            <button class="anim-option" onclick="changeAnimation('particles')">
-                <i class="fas fa-sparkles"></i>
-                <span data-translate="particles">পার্টিকেলস</span>
-            </button>
-            <button class="anim-option" onclick="changeAnimation('stars')">
+            <button class="anim-option" data-anim="stars">
                 <i class="fas fa-star"></i>
-                <span data-translate="stars">তারারা</span>
+                <span>তারারা</span>
             </button>
-            <button class="anim-option" onclick="changeAnimation('confetti')">
-                <i class="fas fa-birthday-cake"></i>
-                <span data-translate="confetti">কনফেটি</span>
+            <button class="anim-option" data-anim="fireflies">
+                <i class="fas fa-sparkles"></i>
+                <span>জোনাকি</span>
+            </button>
+            <button class="anim-option" data-anim="love">
+                <i class="fas fa-heartbeat"></i>
+                <span>ভালোবাসা</span>
+            </button>
+            <button class="anim-option" onclick="stopAnimations()">
+                <i class="fas fa-stop"></i>
+                <span>বন্ধ</span>
             </button>
         </div>
     </div>
 
-    <!-- Animation Canvases -->
-    <canvas id="heartsCanvas"></canvas>
-    <canvas id="particlesCanvas"></canvas>
-    <canvas id="starsCanvas"></canvas>
-    <canvas id="confettiCanvas"></canvas>
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="love-badge">
+                <div class="pulse-ring"></div>
+                <div class="pulse-ring delay-1"></div>
+                <div class="pulse-ring delay-2"></div>
+                <h1 class="main-title">
+                    <span class="name tanvir" data-i18n="tanvir">তানভীর</span>
+                    <span class="heart-icon">💖</span>
+                    <span class="name naima" data-i18n="naima">নাইমা</span>
+                </h1>
+            </div>
+            <p class="promise-text" data-i18n="promise">
+                "আজ থেকে ২০ বছর পরও আমার গার্লফ্রেন্ডের নাম হবে নাইমা"
+            </p>
+        </header>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="developer-info">
-            <p data-translate="createdBy">তৈরি করেছেন: Foyeaj Uddin Ovi</p>
-            <p data-translate="tanvirFriend">তানভীরের বন্ধু</p>
-        </div>
-        
-        <div class="social-links">
-            <a href="https://x.com/Foyeajuddinovi" target="_blank" class="social-link">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="https://www.instagram.com/foyeaj_uddin_ovi" target="_blank" class="social-link">
-                <i class="fab fa-instagram"></i>
-            </a>
-        </div>
-        
-        <p style="margin-top: 20px; font-size: 0.9rem;">
-            © ২০২৪-২০৪৪ | এই ওয়েবসাইট চিরকাল সংরক্ষিত থাকবে
-        </p>
-    </footer>
+        <!-- Countdown Section -->
+        <section class="countdown-section">
+            <div class="section-header">
+                <i class="fas fa-clock"></i>
+                <h2 data-i18n="countdownTitle">২০ বছর কাউন্টডাউন</h2>
+            </div>
+            
+            <div class="countdown-container">
+                <div class="time-unit">
+                    <div class="time-number" id="years">-</div>
+                    <div class="time-label" data-i18n="years">বছর</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-number" id="days">-</div>
+                    <div class="time-label" data-i18n="days">দিন</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-number" id="hours">-</div>
+                    <div class="time-label" data-i18n="hours">ঘন্টা</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-number" id="minutes">-</div>
+                    <div class="time-label" data-i18n="minutes">মিনিট</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-number" id="seconds">-</div>
+                    <div class="time-label" data-i18n="seconds">সেকেন্ড</div>
+                </div>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span data-i18n="startDate">শুরু: ২০২৪</span>
+                    <span id="progressText" data-i18n="progress">০% পার হয়েছে</span>
+                    <span data-i18n="endDate">শেষ: ২০৪৪</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            
+            <div class="target-date">
+                <i class="far fa-calendar-alt"></i>
+                <span data-i18n="completeDate">২০ বছর পূর্ণ হবে: ২৮ নভেম্বর, ২০৪৪</span>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section class="video-section">
+            <div class="section-header">
+                <i class="fas fa-video"></i>
+                <h2 data-i18n="videoTitle">প্রতিশ্রুতি ভিডিও</h2>
+            </div>
+            
+            <div class="video-wrapper">
+                <div class="video-container">
+                    <video id="loveVideo" controls playsinline poster="poster.jpg">
+                        <source src="promise.mp4" type="video/mp4">
+                        আপনার ব্রাউজার ভিডিও সাপোর্ট করে না।
+                    </video>
+                    
+                    <!-- Fallback if video fails -->
+                    <div id="videoFallback" class="video-fallback">
+                        <i class="fas fa-play-circle"></i>
+                        <h3 data-i18n="videoError">ভিডিও লোড হচ্ছে না</h3>
+                        <p data-i18n="videoErrorText">promise.mp4 ফাইলটি চেক করুন</p>
+                        <button class="retry-btn" onclick="loadVideo()" data-i18n="retry">আবার চেষ্টা করুন</button>
+                    </div>
+                </div>
+                
+                <div class="video-controls">
+                    <button class="video-btn" onclick="toggleFullscreen()">
+                        <i class="fas fa-expand"></i>
+                        <span data-i18n="fullscreen">ফুলস্ক্রীন</span>
+                    </button>
+                    <button class="video-btn" onclick="verifyPromise()">
+                        <i class="fas fa-check-circle"></i>
+                        <span data-i18n="verify">প্রমাণিত</span>
+                    </button>
+                    <button class="video-btn" onclick="shareVideo()">
+                        <i class="fas fa-share-alt"></i>
+                        <span data-i18n="share">শেয়ার</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Love Letter Section -->
+        <section class="letter-section">
+            <div class="section-header">
+                <i class="fas fa-heart"></i>
+                <h2 data-i18n="letterTitle">প্রেমপত্র</h2>
+            </div>
+            
+            <div class="letter-container">
+                <div class="letter-paper">
+                    <div class="letter-header">
+                        <div class="date" data-i18n="letterDate">২৮ নভেম্বর, ২০২৪</div>
+                        <div class="salutation" data-i18n="salutation">প্রিয় নাইমা,</div>
+                    </div>
+                    
+                    <div class="letter-content">
+                        <p data-i18n="letterPara1">
+                            আজ থেকে ঠিক ২০ বছর পর, যখন তুমি এই ওয়েবসাইটটি দেখবে, আমি চাই তুমি জানতে যে আমি এখনও তোমাকে ঠিক ততটাই ভালোবাসি যতটা আজ ভালোবাসি।
+                        </p>
+                        
+                        <p data-i18n="letterPara2">
+                            প্রতিটি সকাল তোমার নাম দিয়ে শুরু হয়, প্রতিটি রাত্রি তোমার নাম দিয়ে শেষ হয়। এই ২০ বছর শুধু সংখ্যা নয়, এটা আমাদের ভালোবাসার অমরত্বের প্রমাণ।
+                        </p>
+                        
+                        <div class="highlighted-promise">
+                            <i class="fas fa-quote-left"></i>
+                            <p data-i18n="highlightPromise">
+                                আমি তানভীর আজ ঘোষণা করছি যে, ২০৪৪ সালেও আমার গার্লফ্রেন্ডের নাম হবে নাইমা। এই ওয়েবসাইট আমাদের ভালোবাসার স্থায়ী সাক্ষী।
+                            </p>
+                            <i class="fas fa-quote-right"></i>
+                        </div>
+                        
+                        <p data-i18n="letterPara3">
+                            এই ডিজিটাল সময়কapsuleটি প্রমাণ করবে যে ভালোবাসা সময়ের সীমা মানে না। আজ থেকে ২০ বছর পরও আমি তোমাকে বলবো, "আমি তোমাকে ভালোবাসি নাইমা"।
+                        </p>
+                    </div>
+                    
+                    <div class="letter-footer">
+                        <div class="signature">
+                            <div class="signature-line"></div>
+                            <div class="signature-name" data-i18n="signature">তোমারই তানভীর</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Developer Info -->
+        <footer class="footer">
+            <div class="developer-card">
+                <div class="dev-avatar">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="dev-info">
+                    <h3 data-i18n="developedBy">তৈরি করেছেন</h3>
+                    <p class="dev-name">Foyeaj Uddin Ovi</p>
+                    <p class="dev-role" data-i18n="devRole">তানভীরের বন্ধু</p>
+                    
+                    <div class="social-links">
+                        <a href="https://x.com/Foyeajuddinovi" target="_blank" class="social-link twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.instagram.com/foyeaj_uddin_ovi" target="_blank" class="social-link instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tech-info">
+                <p><i class="fas fa-server"></i> <span data-i18n="hosted">গিটহাব + ভের্সেলে হোস্টেড</span></p>
+                <p><i class="fas fa-shield-alt"></i> <span data-i18n="preserved">২০৪৪ সাল পর্যন্ত সংরক্ষিত</span></p>
+                <p><i class="fas fa-heart"></i> <span data-i18n="forever">তানভীর ❤️ নাইমা চিরকাল</span></p>
+            </div>
+            
+            <div class="copyright">
+                <p>© ২০২৪-২০৪৪ | এই ওয়েবসাইট চিরকাল তানভীর ও নাইমার ভালোবাসার সাক্ষী থাকবে</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Animation Canvas -->
+    <canvas id="animationCanvas"></canvas>
 
     <!-- Scripts -->
-    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
     <script src="script.js"></script>
+    
+    <script>
+        // Load website after 2 seconds
+        setTimeout(() => {
+            document.getElementById('loadingScreen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.display = 'none';
+            }, 500);
+        }, 2000);
+    </script>
 </body>
 </html>
