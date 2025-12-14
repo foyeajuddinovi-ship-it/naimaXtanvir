@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>তানভীরের প্রতিশ্রুতি - নাইমার জন্য ২০ বছর</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kalpurush&family=Hind+Siliguri:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+</head>
+<body>
+    <!-- Welcome Animation -->
+    <div id="welcomeAnimation" class="welcome-screen">
+        <div class="welcome-content">
+            <div class="promise-text-animation">
+                <h1 class="typing-text" id="typingText"></h1>
+                <div class="promise-statement">
+                    <p>"আমি <span class="highlight">তানভীর</span> প্রতিজ্ঞা করছি,</p>
+                    <p>আগামী <span class="highlight">২০ বছর</span> পরও</p>
+                    <p>আমার গার্লফ্রেন্ডের নাম হবে</p>
+                    <p class="naima-name"><span class="heart">❤️</span> নাইমা <span class="heart">❤️</span></p>
+                </div>
+                <button class="enter-btn" onclick="enterWebsite()">
+                    <span>প্রবেশ করুন</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Website (Initially Hidden) -->
+    <div id="mainWebsite" class="main-website" style="display: none;">
+        
+        <!-- Floating Action Button for Animations -->
+        <div class="fab-container">
+            <button class="fab-main" id="fabMain">
+                <i class="fas fa-magic"></i>
+            </button>
+            <div class="fab-menu">
+                <button class="fab-option" data-anim="hearts">
+                    <i class="fas fa-heart"></i>
+                    <span>হার্টস</span>
+                </button>
+                <button class="fab-option" data-anim="particles">
+                    <i class="fas fa-sparkles"></i>
+                    <span>পার্টিকেলস</span>
+                </button>
+                <button class="fab-option" data-anim="butterflies">
+                    <i class="fas fa-butterfly"></i>
+                    <span>প্রজাপতি</span>
+                </button>
+                <button class="fab-option" data-anim="fireworks">
+                    <i class="fas fa-fire"></i>
+                    <span>আতশবাজি</span>
+                </button>
+                <button class="fab-option" data-anim="snow">
+                    <i class="fas fa-snowflake"></i>
+                    <span>তুষার</span>
+                </button>
+                <button class="fab-option" data-anim="stars">
+                    <i class="fas fa-star"></i>
+                    <span>তারারা</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Language Selector -->
+        <div class="language-selector">
+            <button class="lang-btn active" data-lang="bn">
+                <span class="flag">🇧🇩</span>
+                <span>বাংলা</span>
+            </button>
+            <button class="lang-btn" data-lang="en">
+                <span class="flag">🇬🇧</span>
+                <span>English</span>
+            </button>
+        </div>
+
+        <!-- Header -->
+        <header class="main-header">
+            <div class="couple-names">
+                <div class="name-tag tanvir">
+                    <div class="name-ring"></div>
+                    <h1>তানভীর</h1>
+                </div>
+                <div class="love-symbol">
+                    <div class="heart-beat">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+                <div class="name-tag naima">
+                    <div class="name-ring"></div>
+                    <h1>নাইমা</h1>
+                </div>
+            </div>
+            <p class="tagline">২০ বছরের অমর ভালোবাসার প্রতিশ্রুতি</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="content-grid">
+            <!-- Left Column: Promise Video -->
+            <section class="video-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-video"></i> প্রতিশ্রুতি ভিডিও</h2>
+                    <div class="video-badges">
+                        <span class="badge">1080p</span>
+                        <span class="badge">HD</span>
+                    </div>
+                </div>
+                
+                <div class="video-container">
+                    <video id="promiseVideo" controls playsinline poster="assets/poster.jpg">
+                        <source src="assets/video/promise.mp4" type="video/mp4">
+                        আপনার ব্রাউজার ভিডিও সাপোর্ট করে না।
+                    </video>
+                </div>
+                
+                <div class="video-actions">
+                    <button class="action-btn fullscreen-btn">
+                        <i class="fas fa-expand"></i>
+                        <span>ফুলস্ক্রীন</span>
+                    </button>
+                    <button class="action-btn download-btn">
+                        <i class="fas fa-download"></i>
+                        <span>ডাউনলোড</span>
+                    </button>
+                    <button class="action-btn verify-btn" onclick="verifyPromise()">
+                        <i class="fas fa-check-circle"></i>
+                        <span>প্রমাণিত</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Middle Column: Countdown Timer -->
+            <section class="countdown-card">
+                <div class="card-header">
+                    <h2><i class="far fa-clock"></i> ২০ বছর কাউন্টডাউন</h2>
+                    <div class="target-date">২৮ নভেম্বর, ২০৪৪</div>
+                </div>
+                
+                <div class="countdown-display">
+                    <div class="time-section years">
+                        <div class="time-value" id="cdYears">20</div>
+                        <div class="time-label">বছর</div>
+                    </div>
+                    <div class="time-section days">
+                        <div class="time-value" id="cdDays">364</div>
+                        <div class="time-label">দিন</div>
+                    </div>
+                    <div class="time-separator">:</div>
+                    <div class="time-section hours">
+                        <div class="time-value" id="cdHours">23</div>
+                        <div class="time-label">ঘন্টা</div>
+                    </div>
+                    <div class="time-separator">:</div>
+                    <div class="time-section minutes">
+                        <div class="time-value" id="cdMinutes">59</div>
+                        <div class="time-label">মিনিট</div>
+                    </div>
+                    <div class="time-separator">:</div>
+                    <div class="time-section seconds">
+                        <div class="time-value" id="cdSeconds">59</div>
+                        <div class="time-label">সেকেন্ড</div>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-text">
+                        <span>সময় পার হয়েছে:</span>
+                        <span id="progressPercent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+                
+                <div class="milestone-tracker">
+                    <div class="milestone" data-year="2024">
+                        <div class="milestone-dot"></div>
+                        <div class="milestone-label">শুরু</div>
+                    </div>
+                    <div class="milestone" data-year="2029">
+                        <div class="milestone-dot"></div>
+                        <div class="milestone-label">৫ বছর</div>
+                    </div>
+                    <div class="milestone" data-year="2034">
+                        <div class="milestone-dot"></div>
+                        <div class="milestone-label">১০ বছর</div>
+                    </div>
+                    <div class="milestone" data-year="2039">
+                        <div class="milestone-dot"></div>
+                        <div class="milestone-label">১৫ বছর</div>
+                    </div>
+                    <div class="milestone active" data-year="2044">
+                        <div class="milestone-dot"></div>
+                        <div class="milestone-label">২০ বছর</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Column: Love Letter -->
+            <section class="letter-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-envelope"></i> প্রেমপত্র</h2>
+                    <div class="letter-date">২৮ নভেম্বর, ২০২৪</div>
+                </div>
+                
+                <div class="letter-container">
+                    <div class="letter-paper">
+                        <div class="letter-header">
+                            <div class="salutation">প্রিয় নাইমা,</div>
+                        </div>
+                        
+                        <div class="letter-content">
+                            <p>আজ থেকে ঠিক ২০ বছর পর, যখন তুমি এই ওয়েবসাইটটি দেখবে, আমি চাই তুমি জানতে যে আজকের মতোই আমি তখনও তোমাকে ভালোবাসি।</p>
+                            
+                            <p>প্রতিটি সকালে যখন চোখ খুলি, প্রথম কথা তোমার নাম। প্রতিটি রাতে ঘুমানোর আগে শেষ কথা তোমার নাম। এই ২০ বছর শুধু সংখ্যা নয়, এটা আমাদের ভালোবাসার স্থায়িত্বের প্রতীক।</p>
+                            
+                            <p>এই ডিজিটাল প্রতিশ্রুতিই প্রমাণ করবে, সময় যতই বদলাক, পৃথিবী যতই এগিয়ে যাক, তানভীরের হৃদয়ের মালিকানা শুধু একজনের - নাইমার।</p>
+                            
+                            <div class="promise-highlight">
+                                <i class="fas fa-quote-left"></i>
+                                <span>আজ থেকেই বলছি, ২০৪৪ সালেও আমার গার্লফ্রেন্ডের নাম হবে নাইমা</span>
+                                <i class="fas fa-quote-right"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="letter-footer">
+                            <div class="signature">
+                                <div class="signature-line"></div>
+                                <div class="signature-name">তোমারই তানভীর</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="letter-actions">
+                    <button class="action-btn print-btn">
+                        <i class="fas fa-print"></i>
+                        <span>প্রিন্ট</span>
+                    </button>
+                    <button class="action-btn save-btn">
+                        <i class="fas fa-save"></i>
+                        <span>সেভ</span>
+                    </button>
+                    <button class="action-btn share-letter-btn">
+                        <i class="fas fa-share-alt"></i>
+                        <span>শেয়ার</span>
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Developer Info -->
+        <footer class="developer-footer">
+            <div class="developer-info">
+                <div class="dev-avatar">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="dev-details">
+                    <h3>তৈরি করেছেন</h3>
+                    <p class="dev-name">Foyeaj Uddin Ovi</p>
+                    <p class="dev-tag">তানভীরের বন্ধু</p>
+                    <div class="social-links">
+                        <a href="https://x.com/Foyeajuddinovi" target="_blank" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.instagram.com/foyeaj_uddin_ovi" target="_blank" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tech-info">
+                <p><i class="fas fa-server"></i> গিটহাব + ভের্সেলে হোস্টেড</p>
+                <p><i class="fas fa-shield-alt"></i> ২০৪৪ সাল পর্যন্ত সংরক্ষিত</p>
+                <p><i class="fas fa-heart"></i> With Love for Tanvir & Naima</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Animation Canvases -->
+    <canvas id="heartsCanvas"></canvas>
+    <canvas id="particlesCanvas"></canvas>
+    <canvas id="butterfliesCanvas"></canvas>
+    <canvas id="fireworksCanvas"></canvas>
+    <canvas id="snowCanvas"></canvas>
+    <canvas id="starsCanvas"></canvas>
+
+    <!-- Scripts -->
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
