@@ -1,87 +1,106 @@
-// ==================== ১. ট্রান্সলেশন সিস্টেম ====================
+// ============================
+// ১. গ্লোবাল ভেরিয়েবলস
+// ============================
+let currentLang = 'bn';
+let currentAnimation = 'hearts';
+let animationInterval = null;
+let particles = [];
+let animationRunning = true;
+
+// ============================
+// ২. ট্রান্সলেশন সিস্টেম (সম্পূর্ণ)
+// ============================
 const translations = {
     bn: {
-        // Buttons & Titles
-        "videoTitle": "প্রতিশ্রুতি ভিডিও",
-        "countdownTitle": "২০ বছর কাউন্টডাউন",
-        "letterTitle": "প্রেমপত্র",
-        "fullscreen": "ফুলস্ক্রীন",
-        "verify": "প্রমাণিত",
+        // Header
+        "tanvir": "তানভীর",
+        "naima": "নাইমা",
+        "promise": "\"আজ থেকে ২০ বছর পরও আমার গার্লফ্রেন্ডের নাম হবে নাইমা\"",
         
         // Countdown
+        "countdownTitle": "২০ বছর কাউন্টডাউন",
         "years": "বছর",
         "days": "দিন",
         "hours": "ঘন্টা",
         "minutes": "মিনিট",
         "seconds": "সেকেন্ড",
-        "until": "পূর্ণ হবে",
+        "startDate": "শুরু: ২০২৪",
+        "progress": "০% পার হয়েছে",
+        "endDate": "শেষ: ২০৪৪",
+        "completeDate": "২০ বছর পূর্ণ হবে: ২৮ নভেম্বর, ২০৪৪",
         
-        // Animations
-        "hearts": "হার্টস",
-        "particles": "পার্টিকেলস",
-        "stars": "তারারা",
-        "confetti": "কনফেটি",
+        // Video
+        "videoTitle": "প্রতিশ্রুতি ভিডিও",
+        "videoError": "ভিডিও লোড হচ্ছে না",
+        "videoErrorText": "promise.mp4 ফাইলটি চেক করুন",
+        "fullscreen": "ফুলস্ক্রীন",
+        "verify": "প্রমাণিত",
+        "share": "শেয়ার",
+        "retry": "আবার চেষ্টা করুন",
         
-        // Footer
-        "createdBy": "তৈরি করেছেন",
-        "tanvirFriend": "তানভীরের বন্ধু",
+        // Letter
+        "letterTitle": "প্রেমপত্র",
+        "letterDate": "২৮ নভেম্বর, ২০২৪",
+        "salutation": "প্রিয় নাইমা,",
+        "letterPara1": "আজ থেকে ঠিক ২০ বছর পর, যখন তুমি এই ওয়েবসাইটটি দেখবে, আমি চাই তুমি জানতে যে আমি এখনও তোমাকে ঠিক ততটাই ভালোবাসি যতটা আজ ভালোবাসি।",
+        "letterPara2": "প্রতিটি সকাল তোমার নাম দিয়ে শুরু হয়, প্রতিটি রাত্রি তোমার নাম দিয়ে শেষ হয়। এই ২০ বছর শুধু সংখ্যা নয়, এটা আমাদের ভালোবাসার অমরত্বের প্রমাণ।",
+        "highlightPromise": "আমি তানভীর আজ ঘোষণা করছি যে, ২০৪৪ সালেও আমার গার্লফ্রেন্ডের নাম হবে নাইমা। এই ওয়েবসাইট আমাদের ভালোবাসার স্থায়ী সাক্ষী।",
+        "letterPara3": "এই ডিজিটাল সময়কapsuleটি প্রমাণ করবে যে ভালোবাসা সময়ের সীমা মানে না। আজ থেকে ২০ বছর পরও আমি তোমাকে বলবো, \"আমি তোমাকে ভালোবাসি নাইমা\"।",
+        "signature": "তোমারই তানভীর",
         
-        // Love Letter
-        "letterContent": `
-            <p>প্রিয় নাইমা,</p>
-            <br>
-            <p>আজ থেকে ঠিক ২০ বছর পর, ২০৪৪ সালের ২৮ নভেম্বর, যখন তুমি এই ওয়েবসাইটটি দেখবে, আমি চাই তুমি জানতে যে আমি এখনও তোমাকে ঠিক ততটাই ভালোবাসি যতটা আজ ভালোবাসি।</p>
-            <br>
-            <p>এই ডিজিটাল প্রতিশ্রুতিই প্রমাণ করবে, সময় যতই বদলাক, পৃথিবী যতই এগিয়ে যাক, তানভীরের হৃদয় শুধু নাইমার জন্য।</p>
-            <br>
-            <p style="font-style: italic; color: #ff4d94;">
-                "আজ থেকেই বলছি, ২০৪৪ সালেও আমার গার্লফ্রেন্ডের নাম হবে নাইমা"
-            </p>
-        `
+        // Developer
+        "developedBy": "তৈরি করেছেন",
+        "devRole": "তানভীরের বন্ধু",
+        "hosted": "গিটহাব + ভের্সেলে হোস্টেড",
+        "preserved": "২০৪৪ সাল পর্যন্ত সংরক্ষিত",
+        "forever": "তানভীর ❤️ নাইমা চিরকাল"
     },
     
     en: {
-        // Buttons & Titles
-        "videoTitle": "Promise Video",
-        "countdownTitle": "20 Years Countdown",
-        "letterTitle": "Love Letter",
-        "fullscreen": "Fullscreen",
-        "verify": "Verified",
+        // Header
+        "tanvir": "Tanvir",
+        "naima": "Naima",
+        "promise": "\"Even after 20 years, my girlfriend's name will be Naima\"",
         
         // Countdown
+        "countdownTitle": "20 Years Countdown",
         "years": "Years",
         "days": "Days",
         "hours": "Hours",
         "minutes": "Minutes",
         "seconds": "Seconds",
-        "until": "Until",
+        "startDate": "Start: 2024",
+        "progress": "0% Complete",
+        "endDate": "End: 2044",
+        "completeDate": "20 Years Complete: November 28, 2044",
         
-        // Animations
-        "hearts": "Hearts",
-        "particles": "Particles",
-        "stars": "Stars",
-        "confetti": "Confetti",
+        // Video
+        "videoTitle": "Promise Video",
+        "videoError": "Video not loading",
+        "videoErrorText": "Check promise.mp4 file",
+        "fullscreen": "Fullscreen",
+        "verify": "Verified",
+        "share": "Share",
+        "retry": "Retry",
         
-        // Footer
-        "createdBy": "Created by",
-        "tanvirFriend": "Tanvir's Friend",
+        // Letter
+        "letterTitle": "Love Letter",
+        "letterDate": "November 28, 2024",
+        "salutation": "Dear Naima,",
+        "letterPara1": "Exactly 20 years from now, when you see this website, I want you to know that I still love you just as much as I do today.",
+        "letterPara2": "Every morning starts with your name, every night ends with your name. These 20 years are not just numbers, they are proof of our eternal love.",
+        "highlightPromise": "I, Tanvir, declare today that even in 2044, my girlfriend's name will be Naima. This website is a permanent witness to our love.",
+        "letterPara3": "This digital time capsule will prove that love knows no boundaries of time. 20 years from today, I will still tell you, \"I love you Naima\".",
+        "signature": "Yours forever, Tanvir",
         
-        // Love Letter
-        "letterContent": `
-            <p>Dear Naima,</p>
-            <br>
-            <p>Exactly 20 years from today, on November 28, 2044, when you see this website, I want you to know that I still love you just as much as I do today.</p>
-            <br>
-            <p>This digital promise will prove that no matter how time changes, no matter how the world progresses, Tanvir's heart belongs only to Naima.</p>
-            <br>
-            <p style="font-style: italic; color: #ff4d94;">
-                "I declare today, even in 2044 my girlfriend's name will be Naima"
-            </p>
-        `
+        // Developer
+        "developedBy": "Created by",
+        "devRole": "Tanvir's Friend",
+        "hosted": "Hosted on GitHub + Vercel",
+        "preserved": "Preserved until 2044",
+        "forever": "Tanvir ❤️ Naima Forever"
     }
 };
-
-let currentLang = 'bn';
 
 function changeLanguage(lang) {
     currentLang = lang;
@@ -89,31 +108,65 @@ function changeLanguage(lang) {
     // Update language buttons
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.remove('active');
-    });
-    event.target.classList.add('active');
-    
-    // Update all translatable elements
-    document.querySelectorAll('[data-translate]').forEach(element => {
-        const key = element.getAttribute('data-translate');
-        if (translations[lang][key]) {
-            if (key === 'letterContent') {
-                element.innerHTML = translations[lang][key];
-            } else {
-                element.textContent = translations[lang][key];
-            }
+        if (btn.getAttribute('data-lang') === lang) {
+            btn.classList.add('active');
         }
     });
+    
+    // Update all translatable elements
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+            element.textContent = translations[lang][key];
+        }
+    });
+    
+    // Update countdown
+    updateCountdown();
 }
 
-// ==================== ২. কাউন্টডাউন সিস্টেম ====================
+// ============================
+// ৩. কাউন্টডাউন সিস্টেম (২০২৫ সালের জন্য আপডেটেড)
+// ============================
 const targetDate = new Date('November 28, 2044 00:00:00').getTime();
+const startDate = new Date('November 28, 2024 00:00:00').getTime();
 
 function updateCountdown() {
     try {
         const now = new Date().getTime();
         const distance = targetDate - now;
         
-        // Calculate time
+        // Calculate time difference from start
+        const totalDuration = targetDate - startDate;
+        const elapsed = now - startDate;
+        const progressPercent = Math.min(100, Math.max(0, (elapsed / totalDuration) * 100));
+        
+        // Update progress bar and text
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        
+        if (progressFill) {
+            progressFill.style.width = `${progressPercent}%`;
+        }
+        
+        if (progressText) {
+            const text = currentLang === 'bn' 
+                ? `${progressPercent.toFixed(2)}% পার হয়েছে`
+                : `${progressPercent.toFixed(2)}% Complete`;
+            progressText.textContent = text;
+        }
+        
+        // If time has already passed
+        if (distance <= 0) {
+            document.getElementById('years').textContent = "00";
+            document.getElementById('days').textContent = "00";
+            document.getElementById('hours').textContent = "00";
+            document.getElementById('minutes').textContent = "00";
+            document.getElementById('seconds').textContent = "00";
+            return;
+        }
+        
+        // Calculate remaining time
         const years = Math.floor(distance / (1000 * 60 * 60 * 24 * 365));
         const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -127,30 +180,32 @@ function updateCountdown() {
         document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
         document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
         
-        // Update progress bar
-        const totalDuration = 20 * 365 * 24 * 60 * 60 * 1000;
-        const elapsed = totalDuration - distance;
-        const progressPercent = (elapsed / totalDuration) * 100;
-        
-        document.getElementById('progressFill').style.width = `${Math.max(0, Math.min(100, progressPercent))}%`;
-        
-        // Update target date display
-        const targetDateElement = document.getElementById('targetDate');
-        if (targetDateElement) {
-            const date = new Date(targetDate);
-            targetDateElement.textContent = currentLang === 'bn' 
-                ? date.toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' })
-                : date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-        }
-        
     } catch (error) {
-        console.error("Countdown error:", error);
+        console.error('Countdown Error:', error);
     }
 }
 
-// ==================== ৩. ভিডিও সিস্টেম ====================
+// Start countdown
+setInterval(updateCountdown, 1000);
+updateCountdown(); // Initial call
+
+// ============================
+// ৪. ভিডিও সিস্টেম
+// ============================
+function loadVideo() {
+    const video = document.getElementById('loveVideo');
+    const fallback = document.getElementById('videoFallback');
+    
+    if (video) {
+        video.load();
+        video.style.display = 'block';
+        if (fallback) fallback.style.display = 'none';
+    }
+}
+
 function toggleFullscreen() {
     const video = document.getElementById('loveVideo');
+    
     if (!video) return;
     
     if (video.requestFullscreen) {
@@ -163,330 +218,387 @@ function toggleFullscreen() {
 }
 
 function verifyPromise() {
-    const btn = event.target.closest('.btn');
-    if (!btn) return;
-    
-    btn.innerHTML = '<i class="fas fa-check-double"></i> প্রমাণিত ✓';
-    btn.style.background = '#4CAF50';
-    
-    // Show notification
-    showNotification('প্রতিশ্রুতি প্রমাণিত হয়েছে!', 'success');
-}
-
-// ==================== ৪. এনিমেশন সিস্টেম ====================
-let currentAnimation = 'hearts';
-let animationInterval = null;
-
-function toggleAnimMenu() {
-    const menu = document.getElementById('fabMenu');
-    menu.classList.toggle('show');
-}
-
-function changeAnimation(type) {
-    currentAnimation = type;
-    
-    // Hide all canvases
-    document.querySelectorAll('canvas').forEach(canvas => {
-        canvas.style.display = 'none';
-    });
-    
-    // Show selected canvas
-    const selectedCanvas = document.getElementById(`${type}Canvas`);
-    if (selectedCanvas) {
-        selectedCanvas.style.display = 'block';
+    const btn = event?.target.closest('.video-btn') || document.querySelector('.video-btn:nth-child(2)');
+    if (btn) {
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check-double"></i> ✓ Verified';
+        btn.style.background = '#4CAF50';
+        
+        // Show notification
+        showNotification(
+            currentLang === 'bn' 
+                ? 'প্রতিশ্রুতি প্রমাণিত হয়েছে!' 
+                : 'Promise Verified!',
+            'success'
+        );
+        
+        // Reset after 3 seconds
+        setTimeout(() => {
+            btn.innerHTML = originalHTML;
+            btn.style.background = '';
+        }, 3000);
     }
-    
-    // Start animation
-    startAnimation(type);
-    
-    // Close menu
-    document.getElementById('fabMenu').classList.remove('show');
 }
 
-function startAnimation(type) {
-    // Clear previous animation
-    if (animationInterval) {
-        clearInterval(animationInterval);
-    }
+function shareVideo() {
+    const url = window.location.href;
+    const text = currentLang === 'bn' 
+        ? 'দেখো তানভীরের নাইমার জন্য ২০ বছরের প্রতিশ্রুতি!' 
+        : 'See Tanvir\'s 20-year promise to Naima!';
     
-    // Get canvas
-    const canvas = document.getElementById(`${type}Canvas`);
+    if (navigator.share) {
+        navigator.share({
+            title: 'Tanvir ❤️ Naima',
+            text: text,
+            url: url
+        });
+    } else {
+        // Fallback for desktop
+        navigator.clipboard.writeText(url).then(() => {
+            showNotification(
+                currentLang === 'bn' 
+                    ? 'লিংক কপি হয়েছে!' 
+                    : 'Link Copied!',
+                'success'
+            );
+        });
+    }
+}
+
+// ============================
+// ৫. এনিমেশন সিস্টেম
+// ============================
+function initAnimations() {
+    const canvas = document.getElementById('animationCanvas');
     if (!canvas) return;
     
-    const ctx = canvas.getContext('2d');
-    
-    // Set canvas size
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     
-    // Clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // Start animation based on type
-    switch(type) {
-        case 'hearts':
-            animateHearts(ctx, canvas);
-            break;
-        case 'particles':
-            animateParticles(ctx, canvas);
-            break;
-        case 'stars':
-            animateStars(ctx, canvas);
-            break;
-        case 'confetti':
-            animateConfetti(ctx, canvas);
-            break;
-    }
+    // Start default animation
+    startHeartsAnimation();
 }
 
-function animateHearts(ctx, canvas) {
-    let hearts = [];
+function startHeartsAnimation() {
+    const canvas = document.getElementById('animationCanvas');
+    const ctx = canvas.getContext('2d');
     
-    // Create hearts
-    for (let i = 0; i < 30; i++) {
-        hearts.push({
+    if (!canvas || !ctx) return;
+    
+    // Clear previous animation
+    if (animationInterval) {
+        cancelAnimationFrame(animationInterval);
+        particles = [];
+    }
+    
+    // Create particles
+    for (let i = 0; i < 50; i++) {
+        particles.push({
             x: Math.random() * canvas.width,
-            y: canvas.height + 50,
-            size: Math.random() * 20 + 10,
-            speed: Math.random() * 2 + 1,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 15 + 10,
+            speed: Math.random() * 1 + 0.5,
             color: `hsl(${Math.random() * 60 + 300}, 100%, 65%)`,
             rotation: Math.random() * Math.PI * 2
         });
     }
     
-    function draw() {
-        // Clear with slight fade for trail effect
+    function animate() {
+        if (!animationRunning) return;
+        
+        // Clear with fade effect
         ctx.fillStyle = 'rgba(10, 10, 26, 0.1)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        // Draw hearts
-        hearts.forEach(heart => {
+        // Update and draw particles
+        particles.forEach(particle => {
+            // Update position
+            particle.y -= particle.speed;
+            particle.x += Math.sin(particle.y * 0.01);
+            particle.rotation += 0.02;
+            
+            // Reset if off screen
+            if (particle.y < -50) {
+                particle.y = canvas.height + 50;
+                particle.x = Math.random() * canvas.width;
+            }
+            
+            // Draw heart
             ctx.save();
-            ctx.translate(heart.x, heart.y);
-            ctx.rotate(heart.rotation);
-            ctx.fillStyle = heart.color;
+            ctx.translate(particle.x, particle.y);
+            ctx.rotate(particle.rotation);
+            ctx.fillStyle = particle.color;
             
-            // Draw heart shape
+            // Heart shape
             ctx.beginPath();
-            const topCurveHeight = heart.size * 0.3;
-            ctx.moveTo(0, 0 + heart.size / 4);
+            const topCurveHeight = particle.size * 0.3;
+            ctx.moveTo(0, 0 + particle.size / 4);
             
-            // Bezier curves for heart shape
+            // Left top curve
             ctx.bezierCurveTo(
                 0, 0,
-                -heart.size / 2, 0,
-                -heart.size / 2, heart.size / 4
+                -particle.size / 2, 0,
+                -particle.size / 2, particle.size / 4
             );
             
+            // Left bottom curve
             ctx.bezierCurveTo(
-                -heart.size / 2, heart.size / 2,
-                0, heart.size * 0.75,
-                0, heart.size
+                -particle.size / 2, particle.size / 2,
+                0, particle.size * 0.75,
+                0, particle.size
             );
             
+            // Right bottom curve
             ctx.bezierCurveTo(
-                0, heart.size * 0.75,
-                heart.size / 2, heart.size / 2,
-                heart.size / 2, heart.size / 4
+                0, particle.size * 0.75,
+                particle.size / 2, particle.size / 2,
+                particle.size / 2, particle.size / 4
             );
             
+            // Right top curve
             ctx.bezierCurveTo(
-                heart.size / 2, 0,
+                particle.size / 2, 0,
                 0, 0,
-                0, heart.size / 4
+                0, particle.size / 4
             );
             
             ctx.closePath();
             ctx.fill();
             ctx.restore();
-            
-            // Update position
-            heart.y -= heart.speed;
-            heart.x += Math.sin(heart.y * 0.01) * 1.5;
-            heart.rotation += 0.02;
-            
-            // Reset if off screen
-            if (heart.y < -100) {
-                heart.y = canvas.height + 50;
-                heart.x = Math.random() * canvas.width;
-            }
         });
         
-        animationInterval = requestAnimationFrame(draw);
+        animationInterval = requestAnimationFrame(animate);
     }
     
-    draw();
+    animate();
 }
 
-function animateParticles(ctx, canvas) {
-    let particles = [];
+function startStarsAnimation() {
+    const canvas = document.getElementById('animationCanvas');
+    const ctx = canvas.getContext('2d');
     
-    // Create particles
+    if (!canvas || !ctx) return;
+    
+    if (animationInterval) {
+        cancelAnimationFrame(animationInterval);
+        particles = [];
+    }
+    
+    for (let i = 0; i < 200; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2 + 0.5,
+            brightness: Math.random() * 0.5 + 0.5,
+            twinkleSpeed: Math.random() * 0.02 + 0.01
+        });
+    }
+    
+    function animate() {
+        if (!animationRunning) return;
+        
+        ctx.fillStyle = 'rgba(10, 10, 26, 0.8)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        particles.forEach(star => {
+            star.brightness += star.twinkleSpeed;
+            if (star.brightness > 1 || star.brightness < 0.3) {
+                star.twinkleSpeed *= -1;
+            }
+            
+            ctx.fillStyle = `rgba(255, 255, 255, ${star.brightness})`;
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+            ctx.fill();
+        });
+        
+        animationInterval = requestAnimationFrame(animate);
+    }
+    
+    animate();
+}
+
+function startFirefliesAnimation() {
+    const canvas = document.getElementById('animationCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    if (!canvas || !ctx) return;
+    
+    if (animationInterval) {
+        cancelAnimationFrame(animationInterval);
+        particles = [];
+    }
+    
     for (let i = 0; i < 100; i++) {
         particles.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
             size: Math.random() * 3 + 1,
-            speedX: Math.random() * 2 - 1,
-            speedY: Math.random() * 2 - 1,
-            color: `hsl(${Math.random() * 360}, 100%, 70%)`
+            speedX: Math.random() * 1 - 0.5,
+            speedY: Math.random() * 1 - 0.5,
+            color: `hsl(${Math.random() * 60 + 50}, 100%, 60%)`,
+            glow: Math.random() * 0.5 + 0.5
         });
     }
     
-    function draw() {
-        // Clear with fade
+    function animate() {
+        if (!animationRunning) return;
+        
         ctx.fillStyle = 'rgba(10, 10, 26, 0.1)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        // Draw connections
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                if (distance < 100) {
-                    ctx.beginPath();
-                    ctx.strokeStyle = `rgba(255, 77, 148, ${0.2 * (1 - distance/100)})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
-                }
-            }
-        }
-        
-        // Draw particles
-        particles.forEach(particle => {
-            ctx.fillStyle = particle.color;
-            ctx.beginPath();
-            ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-            ctx.fill();
-            
+        particles.forEach(fly => {
             // Update position
-            particle.x += particle.speedX;
-            particle.y += particle.speedY;
+            fly.x += fly.speedX + Math.sin(Date.now() * 0.001 + fly.x) * 0.3;
+            fly.y += fly.speedY + Math.cos(Date.now() * 0.001 + fly.y) * 0.3;
             
             // Bounce off walls
-            if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
-            if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
-        });
-        
-        animationInterval = requestAnimationFrame(draw);
-    }
-    
-    draw();
-}
-
-function animateStars(ctx, canvas) {
-    let stars = [];
-    
-    // Create stars
-    for (let i = 0; i < 200; i++) {
-        stars.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            size: Math.random() * 2 + 0.5,
-            brightness: Math.random() * 0.5 + 0.5,
-            twinkleSpeed: Math.random() * 0.05 + 0.01
-        });
-    }
-    
-    function draw() {
-        // Dark background
-        ctx.fillStyle = 'rgba(10, 10, 26, 0.8)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // Draw stars
-        stars.forEach(star => {
-            const brightness = star.brightness + Math.sin(Date.now() * star.twinkleSpeed) * 0.5;
+            if (fly.x < 0 || fly.x > canvas.width) fly.speedX *= -1;
+            if (fly.y < 0 || fly.y > canvas.height) fly.speedY *= -1;
             
-            ctx.fillStyle = `rgba(255, 255, 255, ${brightness})`;
+            // Glow effect
+            fly.glow = 0.5 + Math.sin(Date.now() * 0.002 + fly.x) * 0.5;
+            
+            // Draw glow
+            const gradient = ctx.createRadialGradient(fly.x, fly.y, 0, fly.x, fly.y, fly.size * 3);
+            gradient.addColorStop(0, `${fly.color}${Math.floor(fly.glow * 255).toString(16).padStart(2, '0')}`);
+            gradient.addColorStop(1, 'transparent');
+            
+            ctx.fillStyle = gradient;
             ctx.beginPath();
-            ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+            ctx.arc(fly.x, fly.y, fly.size * 3, 0, Math.PI * 2);
             ctx.fill();
             
-            // Twinkle effect
-            star.brightness += star.twinkleSpeed;
-            if (star.brightness > 1 || star.brightness < 0.3) {
-                star.twinkleSpeed *= -1;
-            }
+            // Draw firefly
+            ctx.fillStyle = fly.color;
+            ctx.beginPath();
+            ctx.arc(fly.x, fly.y, fly.size, 0, Math.PI * 2);
+            ctx.fill();
         });
         
-        animationInterval = requestAnimationFrame(draw);
+        animationInterval = requestAnimationFrame(animate);
     }
     
-    draw();
+    animate();
 }
 
-function animateConfetti(ctx, canvas) {
-    let confetti = [];
+function startLoveAnimation() {
+    const canvas = document.getElementById('animationCanvas');
+    const ctx = canvas.getContext('2d');
     
-    // Create confetti
-    for (let i = 0; i < 150; i++) {
-        confetti.push({
+    if (!canvas || !ctx) return;
+    
+    if (animationInterval) {
+        cancelAnimationFrame(animationInterval);
+        particles = [];
+    }
+    
+    for (let i = 0; i < 30; i++) {
+        particles.push({
             x: Math.random() * canvas.width,
-            y: Math.random() * -100,
-            size: Math.random() * 10 + 5,
-            speedY: Math.random() * 3 + 2,
-            speedX: Math.random() * 2 - 1,
-            color: `hsl(${Math.random() * 360}, 100%, 60%)`,
-            rotation: Math.random() * Math.PI * 2,
-            rotationSpeed: Math.random() * 0.1 - 0.05,
-            shape: Math.random() > 0.5 ? 'circle' : 'rect'
+            y: canvas.height + 50,
+            text: ['LOVE', '❤️', 'তানভীর', 'নাইমা', 'প্রেম', 'ভালোবাসা'][Math.floor(Math.random() * 6)],
+            size: Math.random() * 20 + 15,
+            speed: Math.random() * 1.5 + 0.5,
+            color: `hsl(${Math.random() * 360}, 100%, 65%)`,
+            rotation: Math.random() * Math.PI * 2
         });
     }
     
-    function draw() {
-        // Clear with slight fade
-        ctx.fillStyle = 'rgba(10, 10, 26, 0.1)';
+    function animate() {
+        if (!animationRunning) return;
+        
+        ctx.fillStyle = 'rgba(10, 10, 26, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        confetti.forEach(c => {
-            ctx.save();
-            ctx.translate(c.x, c.y);
-            ctx.rotate(c.rotation);
-            ctx.fillStyle = c.color;
-            
-            if (c.shape === 'circle') {
-                ctx.beginPath();
-                ctx.arc(0, 0, c.size / 2, 0, Math.PI * 2);
-                ctx.fill();
-            } else {
-                ctx.fillRect(-c.size/2, -c.size/2, c.size, c.size);
-            }
-            
-            ctx.restore();
-            
+        particles.forEach(particle => {
             // Update position
-            c.x += c.speedX;
-            c.y += c.speedY;
-            c.rotation += c.rotationSpeed;
-            
-            // Add gravity
-            c.speedY += 0.05;
+            particle.y -= particle.speed;
+            particle.x += Math.sin(particle.y * 0.01) * 1.2;
+            particle.rotation += 0.01;
             
             // Reset if off screen
-            if (c.y > canvas.height + 50) {
-                c.y = -50;
-                c.x = Math.random() * canvas.width;
-                c.speedY = Math.random() * 3 + 2;
+            if (particle.y < -50) {
+                particle.y = canvas.height + 50;
+                particle.x = Math.random() * canvas.width;
+                particle.text = ['LOVE', '❤️', 'তানভীর', 'নাইমা', 'প্রেম', 'ভালোবাসা'][Math.floor(Math.random() * 6)];
             }
+            
+            // Draw text
+            ctx.save();
+            ctx.translate(particle.x, particle.y);
+            ctx.rotate(particle.rotation);
+            ctx.fillStyle = particle.color;
+            ctx.font = `${particle.size}px 'Hind Siliguri', sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(particle.text, 0, 0);
+            ctx.restore();
         });
         
-        animationInterval = requestAnimationFrame(draw);
+        animationInterval = requestAnimationFrame(animate);
     }
     
-    draw();
+    animate();
 }
 
-// ==================== ৫. ইউটিলিটি ফাংশন ====================
+function changeAnimation(type) {
+    currentAnimation = type;
+    animationRunning = true;
+    
+    // Update active button
+    document.querySelectorAll('.anim-option').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    // Start new animation
+    switch(type) {
+        case 'hearts':
+            startHeartsAnimation();
+            break;
+        case 'stars':
+            startStarsAnimation();
+            break;
+        case 'fireflies':
+            startFirefliesAnimation();
+            break;
+        case 'love':
+            startLoveAnimation();
+            break;
+    }
+}
+
+function stopAnimations() {
+    animationRunning = false;
+    if (animationInterval) {
+        cancelAnimationFrame(animationInterval);
+    }
+    
+    // Clear canvas
+    const canvas = document.getElementById('animationCanvas');
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    
+    // Update button
+    document.querySelectorAll('.anim-option').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+}
+
+// ============================
+// ৬. ইউটিলিটি ফাংশন
+// ============================
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
+    notification.className = 'notification';
     notification.textContent = message;
     notification.style.cssText = `
         position: fixed;
-        top: 20px;
+        top: 80px;
         right: 20px;
         background: ${type === 'success' ? '#4CAF50' : '#2196F3'};
         color: white;
@@ -494,6 +606,7 @@ function showNotification(message, type = 'info') {
         border-radius: 10px;
         z-index: 10000;
         animation: slideIn 0.3s ease;
+        font-family: inherit;
     `;
     
     document.body.appendChild(notification);
@@ -504,9 +617,99 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
-// Add CSS animations
-const style = document.createElement('style');
-style.textContent = `
+// ============================
+// ৭. ইভেন্ট হ্যান্ডলার
+// ============================
+function toggleAnimMenu() {
+    const menu = document.getElementById('animOptions');
+    menu.classList.toggle('show');
+}
+
+// ============================
+// ৮. ইনিশিয়ালাইজেশন
+// ============================
+function initializeWebsite() {
+    console.log('🚀 ওয়েবসাইট শুরু হচ্ছে...');
+    
+    // ১. ট্রান্সলেশন সেটআপ
+    changeLanguage('bn');
+    
+    // ২. কাউন্টডাউন শুরু
+    updateCountdown();
+    
+    // ৩. ভিডিও চেক
+    const video = document.getElementById('loveVideo');
+    const fallback = document.getElementById('videoFallback');
+    
+    if (video) {
+        video.addEventListener('error', function() {
+            if (fallback) {
+                fallback.style.display = 'flex';
+                video.style.display = 'none';
+            }
+        });
+        
+        video.addEventListener('loadeddata', function() {
+            console.log('✅ ভিডিও লোড হয়েছে');
+            if (fallback) fallback.style.display = 'none';
+        });
+    }
+    
+    // ৪. এনিমেশন শুরু
+    initAnimations();
+    
+    // ৫. উইন্ডো রিসাইজ হ্যান্ডেল
+    window.addEventListener('resize', function() {
+        const canvas = document.getElementById('animationCanvas');
+        if (canvas) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+    });
+    
+    // ৬. ইভেন্ট লিসেনার যোগ
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            changeLanguage(this.getAttribute('data-lang'));
+        });
+    });
+    
+    document.querySelectorAll('.anim-option[data-anim]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            changeAnimation(this.getAttribute('data-anim'));
+        });
+    });
+    
+    document.getElementById('animToggle').addEventListener('click', toggleAnimMenu);
+    
+    // ৭. বাইরে ক্লিক করলে মেনু বন্ধ
+    document.addEventListener('click', function(event) {
+        const animControl = document.querySelector('.animation-control');
+        if (!animControl.contains(event.target)) {
+            document.getElementById('animOptions').classList.remove('show');
+        }
+    });
+    
+    console.log('✅ ওয়েবসাইট প্রস্তুত!');
+}
+
+// ============================
+// ৯. পেজ লোড হলে শুরু করুন
+// ============================
+window.addEventListener('DOMContentLoaded', initializeWebsite);
+window.addEventListener('load', function() {
+    console.log('🎯 সবকিছু লোড হয়েছে');
+    showNotification(
+        currentLang === 'bn' 
+            ? 'স্বাগতম! তানভীরের ২০ বছরের প্রতিশ্রুতি দেখুন' 
+            : 'Welcome! See Tanvir\'s 20-year promise',
+        'success'
+    );
+});
+
+// CSS animations add
+const animationStyles = document.createElement('style');
+animationStyles.textContent = `
     @keyframes slideIn {
         from { transform: translateX(100%); opacity: 0; }
         to { transform: translateX(0); opacity: 1; }
@@ -517,54 +720,4 @@ style.textContent = `
         to { transform: translateX(100%); opacity: 0; }
     }
 `;
-document.head.appendChild(style);
-
-// ==================== ৬. ইনিশিয়ালাইজেশন ====================
-function initializeWebsite() {
-    console.log('🌐 ওয়েবসাইট ইনিশিয়ালাইজ হচ্ছে...');
-    
-    // ১. ট্রান্সলেশন সেটআপ
-    changeLanguage('bn');
-    
-    // ২. কাউন্টডাউন শুরু
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-    
-    // ৩. ভিডিও চেক
-    const video = document.getElementById('loveVideo');
-    if (video) {
-        video.addEventListener('loadeddata', function() {
-            console.log('✅ ভিডিও সফলভাবে লোড হয়েছে');
-            showNotification('ভিডিও প্রস্তুত', 'success');
-        });
-        
-        video.addEventListener('error', function() {
-            console.error('❌ ভিডিও লোড করতে সমস্যা');
-            showNotification('ভিডিও ফাইল চেক করুন (promise.mp4)', 'error');
-        });
-    }
-    
-    // ৪. এনিমেশন শুরু
-    startAnimation('hearts');
-    
-    // ৫. উইন্ডো রিসাইজ হ্যান্ডেল
-    window.addEventListener('resize', function() {
-        document.querySelectorAll('canvas').forEach(canvas => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-    });
-    
-    console.log('✅ সবকিছু প্রস্তুত!');
-}
-
-// ==================== ৭. পেজ লোড হলে শুরু করুন ====================
-window.onload = initializeWebsite;
-
-// Fallback যদি window.onload কাজ না করে
-document.addEventListener('DOMContentLoaded', function() {
-    if (!window.initialized) {
-        initializeWebsite();
-        window.initialized = true;
-    }
-});
+document.head.appendChild(animationStyles);
